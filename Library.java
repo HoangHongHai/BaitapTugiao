@@ -19,7 +19,7 @@ public class Library {
     public void printAddress() {
         System.out.println(addres);
     }
-    public void brrowBook(Book book){
+    public void brrowBook(String name){
 
         totalBook.remove(book);
 
