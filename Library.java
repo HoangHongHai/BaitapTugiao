@@ -13,7 +13,9 @@ public class Library {
     }
     public void printAvailableBooks(){
         for (Book book : totalBook) {
-            System.out.println("Ten sach: " + book.getTitle() );
+            if (!book.borrowed) {
+                System.out.println("Ten sach: " + book.getTitle());
+            }
         }
     }
     public void printAddress() {
@@ -21,11 +23,26 @@ public class Library {
     }
     public void brrowBook(String name){
 
-        totalBook.remove(book);
+        for (int i = 0; i < totalBook.size(); i++) {
+            Book check = totalBook.get(i);
+            if (check.getTitle().equals(name)) {
+                check.borrowed = true;
+            }
+        }
+
+//        totalBook.remove(book);
 
     }
-    public void returnBook(){
+    public void returnBook(String returnName) {
 
+        for (int i = 0; i < totalBook.size(); i++) {
+            Book check = totalBook.get(i);
+
+            if (!totalBook.contains(returnName)) {
+                check.borrowed = false;
+            }
+
+        }
     }
 
     public static void main(String[] args) {
@@ -45,9 +62,9 @@ public class Library {
         System.out.println();
 //        Muon sach Familyand Fried
         System.out.println("Brrowing the Family and Friend");
-        firstLibrary.brrowBook(new Book("Family and Friend"));
-        firstLibrary.brrowBook(new Book("Family and Friend"));
-        secondLibrary.brrowBook(new Book("Family and Friend"));
+        firstLibrary.brrowBook("Family and Friend");
+        firstLibrary.brrowBook("Family and Friend");
+        secondLibrary.brrowBook("Family and Friend");
         System.out.println();
 //        in danh sách hiện có
         System.out.println("Danh muc sach hien co trong thu vien thu nhat: ");
@@ -56,6 +73,14 @@ public class Library {
         System.out.println("Danh sach trong thu vien thu hai: ");
         secondLibrary.printAvailableBooks();
         System.out.println();
+
+//        tra sach FAF
+        System.out.println("Tra sach Family and Friend:");
+        firstLibrary.returnBook("Family and Friend");
+        System.out.println();
+//        In danh sasch hieejn cos trong thu vien thu nhat
+        System.out.println("Danh muc sach hien co trong thu vien thu nhat:");
+        firstLibrary.printAvailableBooks();
 
     }
 }
