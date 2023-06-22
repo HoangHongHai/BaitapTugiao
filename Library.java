@@ -38,8 +38,9 @@ public class Library {
         for (int i = 0; i < totalBook.size(); i++) {
             Book check = totalBook.get(i);
 
-            if (!totalBook.contains(returnName)) {
-                check.borrowed = false;
+            if (check.getTitle().equals(returnName) && check.borrowed) {
+                check.returned();
+
             }
 
         }
